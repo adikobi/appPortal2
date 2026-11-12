@@ -71,7 +71,7 @@ h1,.num{font-size:clamp(2.8rem,8.5vw,7rem);line-height:.92;letter-spacing:-.05em
 .card:hover .act,.card:focus-within .act,.act.on{opacity:1}
 @media (hover:none){.act{opacity:.75}}
 @media (hover:hover){.act:hover{background:rgba(0,0,0,.12)}}
-.act:active{transform:scale(.88)}
+.act{color:inherit;text-decoration:none}.act:active{transform:scale(.88)}
 .act.on svg{fill:currentColor}
 .list{grid-template-columns:1fr;gap:0}
 .list .card{flex-direction:row;align-items:center;gap:1.25rem;min-height:0;padding:.95rem .75rem;background:none}
@@ -88,7 +88,7 @@ footer{padding:4rem 0 2rem;overflow:hidden}
 .big{font-size:clamp(3.5rem,16vw,14rem);line-height:.85;letter-spacing:-.06em;font-weight:700;color:var(--card);white-space:nowrap;user-select:none}
 .foot{margin-top:1.5rem;color:var(--mute);font-size:.88rem}.foot a{color:inherit}
 .btn{border:0;border-radius:99px;padding:.6rem 1.2rem;background:var(--card);cursor:pointer;font-weight:500;text-decoration:none;display:inline-block;transition:transform .12s var(--ease),filter .15s}
-.btn:active{transform:scale(.96)}.btn.pri{background:var(--acc);color:#fff}
+[hidden]{display:none!important}.btn:active{transform:scale(.96)}.btn.pri{background:var(--acc);color:#fff}
 @media (hover:hover){.btn:hover{filter:brightness(.95)}}
 .ov{position:fixed;inset:0;z-index:50;display:none;background:rgba(0,0,0,.5)}
 .ov.open{display:flex;animation:fade .15s ease-out}
@@ -153,7 +153,7 @@ footer{padding:4rem 0 2rem;overflow:hidden}
 <footer class="wrap"><div class="big" id="big" aria-hidden="true">Sites</div><div class="foot" id="foot"></div></footer>
 
 <div class="ov" id="ovQl"><div class="sheet ql" role="dialog" aria-label="Preview">
-  <div class="hd"><span class="t" id="qlT"></span><button class="ib" id="qlP" aria-label="Previous"><svg class="i" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button><button class="ib" id="qlN" aria-label="Next"><svg class="i" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button><a class="btn pri" id="qlO" target="_blank" rel="noopener">Open site</a><button class="ib" id="qlX" aria-label="Close"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="hd"><span class="t" id="qlT"></span><button class="ib" id="qlP" aria-label="Previous"><svg class="i" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg></button><button class="ib" id="qlN" aria-label="Next"><svg class="i" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></button><a class="btn" id="qlR" target="_blank" rel="noopener">Repo</a><a class="btn pri" id="qlO" target="_blank" rel="noopener">Open site</a><button class="ib" id="qlX" aria-label="Close"><svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
   <iframe id="qlF" title="Preview" referrerpolicy="no-referrer" loading="lazy"></iframe>
 </div></div>
 <div class="ov" id="ovSet"><div class="sheet set" role="dialog" aria-label="Settings">
@@ -182,7 +182,7 @@ let S={...D};try{S={...D,...JSON.parse(ls("portal:s")||"{}")}}catch{}
 const save=()=>lw("portal:s",JSON.stringify(S));
 const T={repos:[],q:"",topic:null,list:[],first:true,demo:false,profile:null,stamp:0};
 const ck=()=>"portal:r:"+S.user.toLowerCase(),TTL=6e5;
-const IC={star:'<svg class="i" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',eye:'<svg class="i" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',link:'<svg class="i" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3A4 4 0 0 0 11 18.7l1-1"/></svg>',x:'<svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>',undo:'<svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg>'};
+const IC={star:'<svg class="i" viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',eye:'<svg class="i" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',link:'<svg class="i" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3A4 4 0 0 0 11 18.7l1-1"/></svg>',x:'<svg class="i" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg>',code:'<svg class="i" viewBox="0 0 24 24"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg>',undo:'<svg class="i" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg>'};
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const pretty=n=>n.replace(/[-_]+/g," ").replace(/\b[a-z]/g,c=>c.toUpperCase());
 const hash=n=>{let h=0;for(const c of n)h=(h*31+c.charCodeAt(0))>>>0;return h%8};
@@ -192,7 +192,7 @@ const now=Date.now(),ago=d=>new Date(now-d*864e5).toISOString();
 const DEMO=[["tel-aviv-bites","Where to eat in Tel Aviv, mapped and ranked.",3,["food","maps"]],["מחשבון-משכנתא","מחשבון פשוט שמראה כמה תשלמו בכל חודש.",9,["tools"]],["pocket-budget","A tiny budget tracker that lives in your browser.",14,["tools","finance"]],["sunday-recipes","Slow recipes for lazy weekends.",30,["food"]],["הגדרות-צבע","בוחר צבעים לפרויקטים ולעיצובים.",44,["design","tools"]],["trail-notes","Hikes I’ve done and the ones I want to.",60,["maps"]],["type-specimen","A playground for typefaces.",85,["design"]],["daily-words","One new word, every single day.",120,[]]].map(([n,d,a,t],i)=>({id:n,name:n,desc:d,url:"#",topics:t,updated:ago(a),created:ago(a+200+i*20)}));
 async function gh(p){const h={Accept:"application/vnd.github+json"};if(S.token)h.Authorization="Bearer "+S.token;const r=await fetch("https://api.github.com"+p,{headers:h});if(!r.ok)throw new Error(r.status===404?`User “${S.user}” not found.`:"GitHub is not answering right now.");return r.json()}
 async function fetchAll(){let a=[],p=1;for(;;){const j=await gh(`/users/${encodeURIComponent(S.user)}/repos?per_page=100&sort=updated&page=${p}`);a=a.concat(j);if(j.length<100)break;p++}return a}
-const norm=l=>l.filter(r=>r.has_pages&&!isRoot(r.name)&&(S.archived||!r.archived)&&(S.forks||!r.fork)&&!r.disabled).map(r=>({id:r.name,name:r.name,desc:r.description,url:siteUrl(r),topics:r.topics||[],updated:r.pushed_at||r.updated_at,created:r.created_at}));
+const norm=l=>l.filter(r=>r.has_pages&&!isRoot(r.name)&&(S.archived||!r.archived)&&(S.forks||!r.fork)&&!r.disabled).map(r=>({id:r.name,name:r.name,desc:r.description,url:siteUrl(r),topics:r.topics||[],updated:r.pushed_at||r.updated_at,created:r.created_at,repo:r.html_url}));
 async function profile(){try{const c=JSON.parse(ls("portal:p:"+S.user)||"null");let p=c&&Date.now()-c.t<36e5?c.d:null;if(!p){p=await gh("/users/"+encodeURIComponent(S.user));lw("portal:p:"+S.user,JSON.stringify({t:Date.now(),d:p}))}
 const n=p.name||p.login;$("#bn").textContent=n;$("#hn").textContent=n+"’s sites.";$("#big").textContent=n;document.title=n+" — Sites";if(p.bio)$("#hb").textContent=p.bio;$("#av").src=p.avatar_url+"&s=96";$("#av").hidden=false}catch{}}
 async function load(force){skeleton();T.demo=false;
@@ -216,10 +216,11 @@ const pins=new Set(S.pins),hid=new Set(S.hidden);
 g.innerHTML=l.length?l.map((x,i)=>{const p=pins.has(x.id),h=hid.has(x.id);
 return`<article class="card t${hash(x.name)}${h?" hid":""}" data-id="${esc(x.id)}" style="--i:${Math.min(i,16)}">
 <a class="cover" href="${esc(x.url)}" target="_blank" rel="noopener" aria-label="Open ${esc(x.name)}"></a>
-<div class="acts"><button class="act${p?" on":""}" data-a="pin" title="Pin" aria-label="Pin">${IC.star}</button><button class="act" data-a="ql" title="Preview" aria-label="Preview">${IC.eye}</button><button class="act" data-a="copy" title="Copy link" aria-label="Copy link">${IC.link}</button><button class="act" data-a="hide" title="${h?"Unhide":"Hide"}" aria-label="Hide">${h?IC.undo:IC.x}</button></div>
+<div class="acts"><button class="act${p?" on":""}" data-a="pin" title="Pin" aria-label="Pin">${IC.star}</button><button class="act" data-a="ql" title="Preview" aria-label="Preview">${IC.eye}</button>${repoUrl(x)?`<a class="act" href="${esc(repoUrl(x))}" target="_blank" rel="noopener" title="Source on GitHub" aria-label="Source on GitHub">${IC.code}</a>`:""}<button class="act" data-a="copy" title="Copy link" aria-label="Copy link">${IC.link}</button><button class="act" data-a="hide" title="${h?"Unhide":"Hide"}" aria-label="Hide">${h?IC.undo:IC.x}</button></div>
 <h3 dir="auto">${esc(pretty(x.name))}</h3><p dir="auto">${esc(x.desc||"")}</p></article>`}).join(""):`<div class="state">${S.scope==="pins"?"Nothing pinned yet.":S.scope==="hidden"?"Nothing hidden.":"No sites match."}</div>`;
 T.first=false}
 function toast(msg,label,fn){$(".toast")?.remove();const t=document.createElement("div");t.className="toast";t.setAttribute("role","status");t.innerHTML=`<span>${esc(msg)}</span>`+(label?`<button>${esc(label)}</button>`:"");document.body.append(t);if(label)t.querySelector("button").onclick=()=>{fn();t.remove()};setTimeout(()=>t.remove(),label?5000:2000)}
+const repoUrl=x=>x.repo||(T.demo||String(x.id).startsWith("c:")?"":`https://github.com/${S.user}/${x.name}`);
 const byId=id=>items().find(x=>x.id===id);
 function toggle(a,id){const i=S[a].indexOf(id);i<0?S[a].push(id):S[a].splice(i,1);save()}
 function act(a,id){const x=byId(id);if(!x)return;
@@ -241,7 +242,7 @@ function closeOv(s){$(s).classList.remove("open");if(s==="#ovQl")$("#qlF").src="
 $$(".ov").forEach(o=>o.addEventListener("pointerdown",e=>{if(e.target===o)closeOv("#"+o.id)}));
 let qi=-1;
 function openQl(id){qi=T.list.findIndex(x=>x.id===id);if(qi<0)return;showQl();openOv("#ovQl")}
-function showQl(){const x=T.list[qi];$("#qlT").textContent=pretty(x.name);$("#qlO").href=x.url;$("#qlF").src=x.url}
+function showQl(){const x=T.list[qi];$("#qlT").textContent=pretty(x.name);$("#qlO").href=x.url;const rp=repoUrl(x);$("#qlR").hidden=!rp;if(rp)$("#qlR").href=rp;$("#qlF").src=x.url}
 function stepQl(d){if(!T.list.length)return;qi=(qi+d+T.list.length)%T.list.length;showQl()}
 $("#qlP").onclick=()=>stepQl(-1);$("#qlN").onclick=()=>stepQl(1);$("#qlX").onclick=()=>closeOv("#ovQl");
 const PAL={default:["Lime & sky",["#D7F25E","#A9D4FF","#FFB9A8","#A6E7C8","#FFE16B","#F4B8D6","#8EE2E0","#D9D6C9"]],pastel:["Soft pastel",["#F6D6E0","#D6E4F6","#DDF0D2","#FBEBC8","#E3D6F3","#CFEFEA","#F9D9C7","#E6E6E0"]],vivid:["Vivid",["#FFD400","#5C97FF","#FF6B6B","#2ED3A0","#FF9444","#C86BFF","#1FC7E6","#B6F23C"]],earth:["Earth",["#D9B99B","#C8C79A","#E0A98E","#A8BFA0","#E3CF9F","#BFA58F","#9FB5B0","#D8CDBB"]],ocean:["Ocean",["#BFE3F5","#8EC8E8","#A6E1DC","#6FC2C9","#C9E9F2","#9DB8E3","#7FD1D9","#D3E6EE"]],sunset:["Sunset",["#FFC9A3","#FFA69E","#FFD8A8","#F7A8C4","#FFB26B","#E8A0BF","#FFE0A3","#F4B6A0"]],mono:["Mono",["#E4E4E0","#D2D2CD","#C0C0BA","#DADAD5","#CBCBC5","#E9E9E5","#B9B9B3","#D6D6D0"]]};
