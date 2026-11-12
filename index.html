@@ -11,9 +11,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Heebo:wght@400..800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#EDEFE8;--card:#E0E3D9;--ink:#11130E;--mute:#585D52;--acc:#FF4D2E;--ease:cubic-bezier(.23,1,.32,1);
---c0:#D7F25E;--c1:#A9D4FF;--c2:#FFB9A8;--c3:#A6E7C8;--c4:#FFE16B;--c5:#F4B8D6;--c6:#8EE2E0;--c7:#D9D6C9}
-@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0E100C;--card:#1A1D17;--ink:#F0F1EA;--mute:#A0A599;--c0:#37450F;--c1:#16304D;--c2:#52241A;--c3:#12392B;--c4:#4A3C0A;--c5:#4D2038;--c6:#0F3B3B;--c7:#2E2E27}}
-:root[data-theme=dark]{--bg:#0E100C;--card:#1A1D17;--ink:#F0F1EA;--mute:#A0A599;--c0:#37450F;--c1:#16304D;--c2:#52241A;--c3:#12392B;--c4:#4A3C0A;--c5:#4D2038;--c6:#0F3B3B;--c7:#2E2E27}
+--l0:#D7F25E;--l1:#A9D4FF;--l2:#FFB9A8;--l3:#A6E7C8;--l4:#FFE16B;--l5:#F4B8D6;--l6:#8EE2E0;--l7:#D9D6C9;
+--c0:var(--l0);--c1:var(--l1);--c2:var(--l2);--c3:var(--l3);--c4:var(--l4);--c5:var(--l5);--c6:var(--l6);--c7:var(--l7)}
+/* card palettes (light values; dark mode tints are derived) */
+[data-palette=pastel]{--l0:#F6D6E0;--l1:#D6E4F6;--l2:#DDF0D2;--l3:#FBEBC8;--l4:#E3D6F3;--l5:#CFEFEA;--l6:#F9D9C7;--l7:#E6E6E0}
+[data-palette=vivid]{--l0:#FFD400;--l1:#5C97FF;--l2:#FF6B6B;--l3:#2ED3A0;--l4:#FF9444;--l5:#C86BFF;--l6:#1FC7E6;--l7:#B6F23C}
+[data-palette=earth]{--l0:#D9B99B;--l1:#C8C79A;--l2:#E0A98E;--l3:#A8BFA0;--l4:#E3CF9F;--l5:#BFA58F;--l6:#9FB5B0;--l7:#D8CDBB}
+[data-palette=ocean]{--l0:#BFE3F5;--l1:#8EC8E8;--l2:#A6E1DC;--l3:#6FC2C9;--l4:#C9E9F2;--l5:#9DB8E3;--l6:#7FD1D9;--l7:#D3E6EE}
+[data-palette=sunset]{--l0:#FFC9A3;--l1:#FFA69E;--l2:#FFD8A8;--l3:#F7A8C4;--l4:#FFB26B;--l5:#E8A0BF;--l6:#FFE0A3;--l7:#F4B6A0}
+[data-palette=mono]{--l0:#E4E4E0;--l1:#D2D2CD;--l2:#C0C0BA;--l3:#DADAD5;--l4:#CBCBC5;--l5:#E9E9E5;--l6:#B9B9B3;--l7:#D6D6D0}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0E100C;--card:#1A1D17;--ink:#F0F1EA;--mute:#A0A599;
+--c0:color-mix(in srgb,var(--l0) 22%,#0E100C);--c1:color-mix(in srgb,var(--l1) 22%,#0E100C);--c2:color-mix(in srgb,var(--l2) 22%,#0E100C);--c3:color-mix(in srgb,var(--l3) 22%,#0E100C);--c4:color-mix(in srgb,var(--l4) 22%,#0E100C);--c5:color-mix(in srgb,var(--l5) 22%,#0E100C);--c6:color-mix(in srgb,var(--l6) 22%,#0E100C);--c7:color-mix(in srgb,var(--l7) 22%,#0E100C)}}
+:root[data-theme=dark]{--bg:#0E100C;--card:#1A1D17;--ink:#F0F1EA;--mute:#A0A599;
+--c0:color-mix(in srgb,var(--l0) 22%,#0E100C);--c1:color-mix(in srgb,var(--l1) 22%,#0E100C);--c2:color-mix(in srgb,var(--l2) 22%,#0E100C);--c3:color-mix(in srgb,var(--l3) 22%,#0E100C);--c4:color-mix(in srgb,var(--l4) 22%,#0E100C);--c5:color-mix(in srgb,var(--l5) 22%,#0E100C);--c6:color-mix(in srgb,var(--l6) 22%,#0E100C);--c7:color-mix(in srgb,var(--l7) 22%,#0E100C)}
 *{box-sizing:border-box;margin:0}
 html{scroll-padding-top:5rem}
 body{background:var(--bg);color:var(--ink);font:400 1rem/1.5 "Bricolage Grotesque",Heebo,system-ui,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;padding-bottom:env(safe-area-inset-bottom,0)}
@@ -97,12 +107,27 @@ footer{padding:4rem 0 2rem;overflow:hidden}
 .sw{display:flex;gap:.5rem}
 .sw button{width:26px;height:26px;border-radius:50%;border:0;cursor:pointer;transition:transform .12s var(--ease)}
 .sw button:active{transform:scale(.88)}.sw button[aria-pressed=true]{outline:2px solid var(--ink);outline-offset:2px}
+.pal{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem;padding:.4rem 0}
+.pal button{border:0;border-radius:14px;background:var(--card);padding:.6rem;cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:.5rem;font-size:.88rem;font-weight:500;transition:transform .12s var(--ease)}
+.pal button:active{transform:scale(.97)}
+.pal button[aria-pressed=true]{outline:2px solid var(--ink);outline-offset:2px;font-weight:700}
+.pal .chips{display:grid;grid-template-columns:repeat(8,1fr);height:22px;border-radius:6px;overflow:hidden}
 .tg{appearance:none;width:42px;height:26px;border-radius:13px;background:var(--card);position:relative;cursor:pointer;transition:background-color .2s;flex:none}
 .tg::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:var(--ink);transition:transform .2s var(--ease)}
 .tg:checked{background:var(--acc)}.tg:checked::after{transform:translateX(16px);background:#fff}
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 1.2rem);translate:-50% 0;z-index:60;background:var(--ink);color:var(--bg);padding:.65rem 1.1rem;border-radius:99px;display:flex;gap:1rem;align-items:center;animation:pop .25s var(--ease)}
 .toast button{background:none;border:0;font-weight:700;cursor:pointer;text-decoration:underline}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+@media (max-width:640px){
+.grid:not(.list){grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.grid:not(.list) .card{min-height:172px;padding:.8rem .9rem .9rem}
+.grid:not(.list) .card h3{margin-top:2.3rem;font-size:clamp(1.25rem,5.8vw,1.6rem)}
+.grid:not(.list) .card p{font-size:.82rem;padding-top:.8rem;-webkit-line-clamp:3}
+.grid:not(.list) .acts{top:.3rem;right:.25rem}
+.grid:not(.list) .act{width:30px;height:30px}
+.skel{min-height:172px}
+.pal{grid-template-columns:1fr 1fr}
+}
 @media (max-width:640px){.hero{grid-template-columns:1fr}.num{display:none}.brand span{display:none}.search{margin-left:.6rem}.list .card p{display:none}.list .card h3{flex:1}}
 </style>
 </head>
@@ -138,6 +163,8 @@ footer{padding:4rem 0 2rem;overflow:hidden}
   <div class="row"><label for="sTok">API token</label><input id="sTok" type="password" placeholder="Optional" autocomplete="off"></div>
   <div class="row"><label for="sFork">Include forks</label><input id="sFork" class="tg" type="checkbox"></div>
   <div class="row"><label for="sArch">Include archived</label><input id="sArch" class="tg" type="checkbox"></div>
+  <h3>Card colors</h3>
+  <div class="pal" id="pal"></div>
   <h3>Accent</h3>
   <div class="row"><div class="sw" id="sw"></div></div>
   <h3>Extra links</h3>
@@ -150,7 +177,7 @@ footer{padding:4rem 0 2rem;overflow:hidden}
 (()=>{
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const ls=k=>{try{return localStorage.getItem(k)}catch{return null}},lw=(k,v)=>{try{localStorage.setItem(k,v)}catch{}},ld=k=>{try{localStorage.removeItem(k)}catch{}};
-const D={user:"adikobi",token:"",view:"grid",sort:"updated",scope:"all",forks:false,archived:false,accent:"#FF4D2E",pins:[],hidden:[],visits:{},custom:[]};
+const D={user:"adikobi",token:"",view:"grid",sort:"updated",scope:"all",forks:false,archived:false,accent:"#FF4D2E",palette:"default",pins:[],hidden:[],visits:{},custom:[]};
 let S={...D};try{S={...D,...JSON.parse(ls("portal:s")||"{}")}}catch{}
 const save=()=>lw("portal:s",JSON.stringify(S));
 const T={repos:[],q:"",topic:null,list:[],first:true,demo:false,profile:null,stamp:0};
@@ -178,7 +205,7 @@ let r=items().filter(x=>{const h=hid.has(x.id);if(S.scope==="hidden"?!h:h)return
 const cmp={updated:(a,b)=>new Date(b.updated)-new Date(a.updated),created:(a,b)=>new Date(b.created)-new Date(a.created),name:(a,b)=>a.name.localeCompare(b.name),visits:(a,b)=>(S.visits[b.id]||0)-(S.visits[a.id]||0)||new Date(b.updated)-new Date(a.updated)}[S.sort];
 return r.sort((a,b)=>(pins.has(b.id)-pins.has(a.id))||cmp(a,b))}
 function skeleton(){$("#grid").className="grid";$("#grid").innerHTML=Array(6).fill('<div class="skel"></div>').join("")}
-function sync(){for(const[id,k]of[["#sort","sort"],["#view","view"],["#scope","scope"]])$$(id+" button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v===S[k]));document.documentElement.style.setProperty("--acc",S.accent)}
+function sync(){for(const[id,k]of[["#sort","sort"],["#view","view"],["#scope","scope"]])$$(id+" button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.v===S[k]));document.documentElement.style.setProperty("--acc",S.accent);document.documentElement.dataset.palette=S.palette}
 function render(){sync();
 const tc={};T.repos.forEach(x=>x.topics.forEach(t=>tc[t]=(tc[t]||0)+1));const tp=Object.keys(tc).sort((a,b)=>tc[b]-tc[a]).slice(0,8);
 $("#chips").innerHTML=tp.map(t=>`<button data-t="${esc(t)}" aria-pressed="${T.topic===t}">${esc(t)}</button>`).join("");
@@ -217,10 +244,13 @@ function openQl(id){qi=T.list.findIndex(x=>x.id===id);if(qi<0)return;showQl();op
 function showQl(){const x=T.list[qi];$("#qlT").textContent=pretty(x.name);$("#qlO").href=x.url;$("#qlF").src=x.url}
 function stepQl(d){if(!T.list.length)return;qi=(qi+d+T.list.length)%T.list.length;showQl()}
 $("#qlP").onclick=()=>stepQl(-1);$("#qlN").onclick=()=>stepQl(1);$("#qlX").onclick=()=>closeOv("#ovQl");
+const PAL={default:["Lime & sky",["#D7F25E","#A9D4FF","#FFB9A8","#A6E7C8","#FFE16B","#F4B8D6","#8EE2E0","#D9D6C9"]],pastel:["Soft pastel",["#F6D6E0","#D6E4F6","#DDF0D2","#FBEBC8","#E3D6F3","#CFEFEA","#F9D9C7","#E6E6E0"]],vivid:["Vivid",["#FFD400","#5C97FF","#FF6B6B","#2ED3A0","#FF9444","#C86BFF","#1FC7E6","#B6F23C"]],earth:["Earth",["#D9B99B","#C8C79A","#E0A98E","#A8BFA0","#E3CF9F","#BFA58F","#9FB5B0","#D8CDBB"]],ocean:["Ocean",["#BFE3F5","#8EC8E8","#A6E1DC","#6FC2C9","#C9E9F2","#9DB8E3","#7FD1D9","#D3E6EE"]],sunset:["Sunset",["#FFC9A3","#FFA69E","#FFD8A8","#F7A8C4","#FFB26B","#E8A0BF","#FFE0A3","#F4B6A0"]],mono:["Mono",["#E4E4E0","#D2D2CD","#C0C0BA","#DADAD5","#CBCBC5","#E9E9E5","#B9B9B3","#D6D6D0"]]};
 const ACC=["#FF4D2E","#0B6BFF","#00A86B","#E6007A","#11130E"];
 function fillSet(){$("#sUser").value=S.user;$("#sTok").value=S.token;$("#sFork").checked=S.forks;$("#sArch").checked=S.archived;
+$("#pal").innerHTML=Object.entries(PAL).map(([k,[n,c]])=>`<button data-p="${k}" aria-pressed="${S.palette===k}"><span class="chips">${c.map(x=>`<i style="background:${x}"></i>`).join("")}</span>${n}</button>`).join("");
 $("#sw").innerHTML=ACC.map(c=>`<button style="background:${c}" data-c="${c}" aria-pressed="${S.accent===c}" aria-label="Accent ${c}"></button>`).join("");
 $("#cl").innerHTML=S.custom.map((c,i)=>`<div class="row"><span dir="auto">${esc(c.name)}</span><button class="btn" data-d="${i}">Remove</button></div>`).join("")}
+$("#pal").addEventListener("click",e=>{const b=e.target.closest("[data-p]");if(!b)return;S.palette=b.dataset.p;save();sync();fillSet()});
 $("#sw").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;S.accent=b.dataset.c;save();sync();fillSet()});
 $("#cl").addEventListener("click",e=>{const b=e.target.closest("[data-d]");if(!b)return;S.custom.splice(+b.dataset.d,1);save();fillSet();render()});
 $("#cA").onclick=()=>{const n=$("#cN").value.trim(),u=$("#cU").value.trim();if(!n||!/^https?:\/\//i.test(u))return toast("Enter a name and an https:// link");S.custom.push({name:n,url:u,added:new Date().toISOString()});save();$("#cN").value=$("#cU").value="";fillSet();render()};
